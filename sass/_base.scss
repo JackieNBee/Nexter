@@ -45,4 +45,16 @@ body {
     // vh = viewport height | vw = viewport width
     // 40vh = HEIGHT of that particular row will ALWAYS be 40%(40vw) of the viewport width to keep kinda 16:9 screen ratio
     grid-template-rows: 80vh min-content 40vw repeat(3, min-content);
+    // we want 8 columns, width of each one to be between their minumum content and 140px --> the columns start to adapt when we resize screen
+    // first column is the sidebar always 80px
+    // the 2 "1fr" cols are for centering the 8 cols on the center between sidebar and end of viewport -> those two will be the first to shrink until they are 60px because we want some margins anyway so the central cols start to shrink
+    // also with those two we can have "full bleed sections" 
+    // we're naming only the cols because we want to focus only on them
+    grid-template-columns: [sidebar-start] 8rem [sidebar-end full-start] minmax(60px, 1fr) [center-start] repeat(8, [col-start] minmax(min-content, 14rem) [col-end]) [center-end] minmax(60px, 1fr) [full-end];
+
+    &>* {
+        padding: 40px;
+        font-size: 3rem;
+    }
+
 }
