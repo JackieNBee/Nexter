@@ -7,7 +7,40 @@
     margin: 15rem 0;
 
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
+    // grid-template-columns: repeat(3, 1fr);
+    // to make columns responsive without writing Media Queries
+    // auto-fit -> creates as many tracks as can fit based on the width we define (width of a track is between min 250px and max 1fr)
+    // the grid changes automatically from 3x2 to 2x3 to 1x6 as we resize the viewport/as soon as the tracks' width are less than 250px
+    grid-template-columns: repeat(auto-fit, minmax(25rem, 1fr));
     // we should use "gap" instead of "grid-gap"
     grid-gap: 6rem;
+    // to override default "stretch" that create huge space if the bottom text is not a lot
+    align-items: start;
+}
+
+// Grid Item
+// Grid Container
+.feature {
+
+    display: grid;
+    // the icon col will be as large as the icon is and the text col will occupy the rest
+    grid-template-columns: min-content 1fr;
+    // we don't need to define rows, the content will define them
+
+    grid-row-gap: 1.5rem;
+    grid-column-gap: 2.5rem;
+
+    &__icon {
+        fill: $color-primary;
+        width: 4.5rem;
+        height: 4.5rem;
+        // -1 is the last line of the EXPLICIT Grid so here it doesn't make sense because we didn't define rows
+        grid-row: 1 / span 2;
+        // to align it with the text on the right
+        transform: translateY(-1rem);
+    }
+
+    &__text {
+        font-size: 1.7rem;
+    }
 }
