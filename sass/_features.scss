@@ -1,4 +1,13 @@
+// Grid Item
+// Grid Container
 .features {
-    background-color: $color-grey-light-2;
+    // background-color: $color-grey-light-2; // Testing porpouses
     grid-column: center-start / center-end;
+
+    margin: 15rem 0;
+
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    // we should use "gap" instead of "grid-gap"
+    grid-gap: 6rem;
 }
