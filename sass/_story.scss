@@ -7,5 +7,27 @@
     &__content {
         background-color: $color-grey-light-1;
         grid-column: col-start 5 / full-end;
+
+        padding: 6rem 8vw; // using vw to make the padding more natural as the viewport changes
+
+        // Here it's just a one-dimensional layout (an element after another)
+        // so a good solution to vertical center the content is to use Flexbox instead of CSS Grid
+        /*
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: flex-start; // fix button being horizontally stretched
+        */
+
+        // to vertical center the content using CSS Grid
+        display: grid;
+        align-content: center;
+        justify-items: start; // fix button being horizontally stretched
+    }
+
+    &__text {
+        font-size: 1.5rem;
+        font-style: italic;
+        margin-bottom: 4rem;
     }
 }

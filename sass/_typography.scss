@@ -1,4 +1,37 @@
 // Extends != Mixins
+// TODO: Improve the CSS classes and the HTML using @extend
+// From the Sass documentation (https://sass-lang.com/documentation/at-rules/extend)
+/*
+    ... the BEM methodology encourages modifier classes that go on the same elements as block or element classes. 
+    But this can create cluttered HTML, it's prone to errors from forgetting to include both classes, and it can bring non-semantic style concerns into your markup.
+  
+    <div class="error error--serious">
+        Oh no ! You've been hacked!
+    </div>
+
+    .error {
+        border: 1px #f00;
+        background-color: #fdd;
+    }
+
+    .error--serious {
+        border-width: 3px;
+    }
+    
+    Sass’s @extend rule solves this. It’s written @extend <selector>,
+    and it tells Sass that one selector should inherit the styles of another.
+
+    .error {
+        border: 1px #f00;
+        background-color: #fdd;
+
+        &--serious {
+            @extend .error;
+            border-width: 3px;
+        }
+    }
+*/
+
 %heading {
     font-family: $font-display;
     font-weight: 400;
@@ -10,10 +43,24 @@
 
 .heading-2 {
     @extend %heading;
+    font-size: 4rem;
+    font-style: italic; // the italic style has been included in the CSS <link> (400i)
+    line-height: 1;
+
+    &--light {
+        color: $color-grey-light-1;
+    }
+
+    &--dark {
+        color: $color-grey-dark-1;
+    }
 }
 
 .heading-3 {
     @extend %heading;
+    font-size: 1.6rem;
+    color: $color-primary;
+    text-transform: uppercase;
 }
 
 .heading-4 {
@@ -27,4 +74,44 @@
     &--dark {
         color: $color-grey-dark-1;
     }
+}
+
+.btn {
+    background-color: $color-primary;
+    color: #fff;
+    border: none;
+    border-radius: 0; // get rid of the default border-radius
+    font-family: $font-display;
+    font-size: 1.5rem;
+    text-transform: uppercase;
+    padding: 1.8rem 3rem;
+    cursor: pointer;
+    transition: all .2s;
+
+    &:hover {
+        background-color: $color-primary-dark;
+    }
+}
+
+// HELPER CLASSES --> ATOMIC CSS
+// to style a component and to keep it reusable accross the site
+
+// margin bottom small
+.mb-sm {
+    margin-bottom: 2rem;
+}
+
+// margin bottom medium
+.mb-md {
+    margin-bottom: 3rem;
+}
+
+// margin bottom large
+.mb-lg {
+    margin-bottom: 4rem;
+}
+
+// margin bottom huge
+.mb-hg {
+    margin-bottom: 8rem;
 }

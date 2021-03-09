@@ -1,3 +1,4 @@
+@charset "UTF-8";
 *,
 *::before,
 *::after {
@@ -24,9 +25,59 @@ body {
   grid-template-columns: [sidebar-start] 8rem [sidebar-end full-start] minmax(60px, 1fr) [center-start] repeat(8, [col-start] minmax(min-content, 14rem) [col-end]) [center-end] minmax(60px, 1fr) [full-end];
 }
 
+/*
+    ... the BEM methodology encourages modifier classes that go on the same elements as block or element classes. 
+    But this can create cluttered HTML, it's prone to errors from forgetting to include both classes, and it can bring non-semantic style concerns into your markup.
+  
+    <div class="error error--serious">
+        Oh no ! You've been hacked!
+    </div>
+
+    .error {
+        border: 1px #f00;
+        background-color: #fdd;
+    }
+
+    .error--serious {
+        border-width: 3px;
+    }
+    
+    Sass’s @extend rule solves this. It’s written @extend <selector>,
+    and it tells Sass that one selector should inherit the styles of another.
+
+    .error {
+        border: 1px #f00;
+        background-color: #fdd;
+
+        &--serious {
+            @extend .error;
+            border-width: 3px;
+        }
+    }
+*/
 .heading-1, .heading-2, .heading-3, .heading-4 {
   font-family: "Josefin Sans", sans-serif;
   font-weight: 400;
+}
+
+.heading-2 {
+  font-size: 4rem;
+  font-style: italic;
+  line-height: 1;
+}
+
+.heading-2--light {
+  color: #f9f7f6;
+}
+
+.heading-2--dark {
+  color: #54483A;
+}
+
+.heading-3 {
+  font-size: 1.6rem;
+  color: #c69963;
+  text-transform: uppercase;
 }
 
 .heading-4 {
@@ -39,6 +90,39 @@ body {
 
 .heading-4--dark {
   color: #54483A;
+}
+
+.btn {
+  background-color: #c69963;
+  color: #fff;
+  border: none;
+  border-radius: 0;
+  font-family: "Josefin Sans", sans-serif;
+  font-size: 1.5rem;
+  text-transform: uppercase;
+  padding: 1.8rem 3rem;
+  cursor: pointer;
+  transition: all .2s;
+}
+
+.btn:hover {
+  background-color: #B28451;
+}
+
+.mb-sm {
+  margin-bottom: 2rem;
+}
+
+.mb-md {
+  margin-bottom: 3rem;
+}
+
+.mb-lg {
+  margin-bottom: 4rem;
+}
+
+.mb-hg {
+  margin-bottom: 8rem;
 }
 
 .sidebar {
@@ -93,6 +177,22 @@ body {
 .story__content {
   background-color: #f9f7f6;
   grid-column: col-start 5 / full-end;
+  padding: 6rem 8vw;
+  /*
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: flex-start; // fix button being horizontally stretched
+        */
+  display: grid;
+  align-content: center;
+  justify-items: start;
+}
+
+.story__text {
+  font-size: 1.5rem;
+  font-style: italic;
+  margin-bottom: 4rem;
 }
 
 .homes {
