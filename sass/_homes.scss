@@ -12,26 +12,87 @@
 .home {
     background-color: $color-grey-light-1;
 
+    display: grid;
+    // let the CSS Grid algo create rows automatically
+    grid-template-columns: repeat(2, 1fr);
+    grid-row-gap: 3.5rem;
+
     &__img {
         width: 100%;
+        grid-row: 1 / 2;
+        grid-column: 1 / -1;
+        z-index: 1;
     }
 
-    &__like {}
+    &__like {
+        // overlapping a grid on top of another
+        grid-row: 1 / 2;
+        grid-column: 2 / 3;
+        fill: $color-primary;
+        height: 2.5rem;
+        width: 2.5rem;
+        z-index: 2;
 
-    &__name {}
+        // only this grid item should be aligned to the right
+        justify-self: end;
+        margin: 1rem;
+    }
+
+    &__name {
+        // overlapping grid-cell
+        grid-row: 1 / 2;
+        grid-column: 1 / -1;
+        // it's horizontally aligned in the grid-cell
+        justify-self: center;
+        // vertically aligned to the bottom
+        align-self: end;
+        z-index: 3;
+
+        // it's only 80% of the grid-cell
+        width: 80%;
+        font-family: $font-display;
+        font-size: 1.6rem;
+        text-align: center;
+        padding: 1.25rem;
+        background-color: $color-secondary;
+        color: #fff;
+        font-weight: 400;
+        // to move it down and place it between home img and details
+        transform: translateY(50%);
+    }
+
+    // to create some space between home name and first two details
+    &__location,
+    &__rooms {
+        margin-top: 2.5rem;
+    }
 
     &__location,
     &__rooms,
     &__area,
     &__price {
 
+        font-size: 1.5rem;
+        margin-left: 2rem;
+
+        // to put icons and text side by side the easiest solution it to use Flexbox
+        display: flex;
+        // vertically center
+        align-items: center;
+        // now in 2021 it's possibile to add gaps between Flexbox items without using margins
+        gap: 1rem;
+
         svg {
             fill: $color-primary;
             height: 2rem;
             width: 2rem;
+            // OLD METHOD to create some gap between icon and text
+            // margin-right: 1rem;
         }
 
-        p {}
+    }
 
+    &__btn {
+        grid-column: 1 / -1;
     }
 }
