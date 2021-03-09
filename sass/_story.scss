@@ -2,6 +2,45 @@
     &__pictures {
         background-color: $color-primary;
         grid-column: full-start / col-end 4;
+        // add a background image with an overlay on it so it matches the overall look and feel
+        // using linear-gradient TRICK with the same color repeated twice and set to 50% transparency
+        background-image: linear-gradient(rgba($color-primary, .5), rgba($color-primary, .5)), url(../img/back.jpg);
+
+        display: grid;
+        // 6x6 grid
+        grid-template-rows: repeat(6, 1fr);
+        grid-template-columns: repeat(6, 1fr);
+        // to make the center image truly centered in the grid area
+        // in fact images are different and will not fit the entire container because they always try to keep original aspect ratio
+        align-items: center;
+    }
+
+    // couple
+    &__img--1 {
+        width: 100%;
+
+        // to position image using grids instead of position absolute
+        // center the image and make it occupy 4/6 (2/3) or 66% of the container
+        grid-row: 2 / 6;
+        grid-column: 2 / 6;
+
+        box-shadow: 0 2rem 5rem rgba(#000, .1);
+    }
+
+    // new house
+    &__img--2 {
+        // make it bigger so it can overflow on the right insead of using transform scale
+        // because it wouldn't start in the middle anymore and would need to change transform-origin
+        width: 115%;
+
+        // to position image using grids instead of position absolute
+        grid-row: 4 / 6;
+        grid-column: 4 / 7;
+
+        // to make overflow part visible
+        z-index: 20;
+
+        box-shadow: 0 2rem 5rem rgba(#000, .2);
     }
 
     &__content {
