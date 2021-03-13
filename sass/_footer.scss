@@ -1,4 +1,56 @@
 .footer {
     background-color: $color-secondary;
     grid-column: full-start / full-end;
+    padding: 8rem;
+}
+
+.nav {
+    list-style: none;
+
+    display: grid;
+    // instead of writing repeat(6, 1fr) we want it to be responsive without media queries
+    // auto-fit: automatically decide how many colums, minmax(20rem, 1fr): columns should always be between 20rem and 1fr
+    // as soom as a column is less than 20rem, a column will automatically go on a new row
+    grid-template-columns: repeat(auto-fit, minmax(15rem, 1fr));
+    gap: 2rem;
+    // vertical align grid items in the grid cell
+    align-items: center;
+
+    &__link:link,
+    &__link:visited {
+        font-size: 1.4rem;
+        color: #fff;
+        text-decoration: none;
+        font-family: $font-display;
+        text-transform: uppercase;
+        text-align: center; // -> seems to do nothing...
+        padding: 1.5rem;
+        display: block; // to make element occupy all the available width
+        // create animation for background color and translateY
+        transition: all .2s;
+
+        // &__link:hover
+        // &__link:active
+        &:hover,
+        &:active {
+            // to create kinda a transparent background that makes a light blue background
+            background-color: rgba($color: #fff, $alpha: .05);
+            // move it up a little bit
+            transform: translateY(-3px);
+        }
+
+    }
+}
+
+.copyright {
+    font-size: 1.4rem;
+    color: $color-grey-light-2;
+    margin-top: 6rem;
+
+    // to center text
+    text-align: center;
+    margin-right: auto;
+    margin-left: auto;
+
+    width: 70%; // make the text shorter
 }
