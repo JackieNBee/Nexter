@@ -4,4 +4,40 @@
     grid-column: sidebar-start / sidebar-end;
     // span across all rows
     grid-row: 1 / -1;
+
+    // to horizontally center the button
+    display: flex;
+    justify-content: center;
+}
+
+.nav-btn {
+    border: 0;
+    border-radius: 0;
+
+    background-color: #fff;
+    height: 2px;
+    width: 4.5rem;
+    // move all the button down otherwise the ::before is not visible
+    margin-top: 4rem;
+
+    // first and third lines of the button
+    &::before,
+    &::after {
+        background-color: #fff;
+        height: 2px;
+        width: 4.5rem;
+        content: "";
+        display: block;
+    }
+
+    &::before {
+        transform: translateY(-1.5rem);
+    }
+
+    &::after {
+        // to make the third line have the same distance from the center as the first line we cannot put the same value
+        // because the translate property doesn't start counting the offset at the center
+        transform: translateY(1.3rem);
+    }
+
 }
