@@ -38,12 +38,36 @@
   }
 
   &__seenon-text {
+    display: grid;
+    grid-template-columns: 1fr max-content 1fr;
+    column-gap: 1.5rem;
+    align-items: center;
+
+    font-size: 1.6rem;
+    color: $color-grey-light-2;
+
+    // we use pseudo element to create the lines that surrounds the seenon-text
+    // TEXT and PSEUDO-ELEMENTS can be used as grid-items!
+    &::before,
+    &::after {
+      content: "";
+      height: 1px;
+      display: block;
+      background-color: currentColor;
+    }
   }
 
   &__seenon-logos {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    column-gap: 3rem;
+    justify-items: center;
+
     img {
       // make images have the same height instead of same width otherwise it would be strange
       height: 2.5rem;
+      // make the images darker (from white to grey)
+      filter: brightness(70%);
     }
   }
 }
