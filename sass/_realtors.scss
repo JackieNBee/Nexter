@@ -11,12 +11,31 @@
   justify-items: center;
   row-gap: 2rem;
 
+  // below $bp-medium
+  @media only screen and (max-width: $bp-medium) {
+    // make the realtors section span the entire viewport
+    grid-column: 1 / -1; // could have also written full-start / full-end
+  }
+
   &__list {
     display: grid;
     grid-template-columns: min-content max-content;
     column-gap: 2rem;
     row-gap: 5vh;
     align-items: center;
+
+    @media only screen and (max-width: $bp-medium) {
+      // put the realtors side by side
+      // 3 times (img and text)
+      // we can put more than 1 track inside of repeat()
+      grid-template-columns: repeat(3, min-content max-content);
+    }
+
+    // below $bp-small
+    @media only screen and (max-width: $bp-small) {
+      // put them back one below the other
+      grid-template-columns: min-content max-content;
+    }
   }
 
   &__img {

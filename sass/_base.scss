@@ -17,6 +17,8 @@ $font-display: "Josefin Sans", sans-serif;
 // RESPONSIVE BREAKPOINTS
 $bp-largest: 75em; // 1200px (1200 / 16 = 75)
 $bp-large: 62.5em; // 1000px (1000 / 16 = 62.5)
+$bp-medium: 50em; // 800px (800 / 16 = 50)
+$bp-small: 37.5em; // 600px (600 / 16 = 37.5)
 
 // CSS RESET
 *,
@@ -72,7 +74,8 @@ body {
     // add new a new row (sidebar becomes navbar)
     grid-template-rows:
       6rem // since we changed the font size is smaller now, 6rem = 6 * 8px = 48px
-      80vh min-content
+      80vh
+      min-content
       40vw
       repeat(3, min-content);
     // remove a colomn (delete the sidebar)
@@ -83,9 +86,18 @@ body {
       [full-end];
   }
 
-  // Testing porpouses
-  // &>* {
-  //     padding: 40px;
-  //     font-size: 3rem;
-  // }
+  // below $bp-medium
+  @media only screen and (max-width: $bp-medium) {
+    // add new a new row (sidebar becomes navbar)
+    grid-template-rows: 6rem // navbar
+      // fill up the entire viewport height minus the navbar so the next section will immediately appear aft the header
+      calc(100vh - 6rem);
+    // min-content // add a new row for the realtors section
+    // min-content
+    // min-content // new row for the story section
+    // repeat(3, min-content);
+    // --> no need to write all of these min-content, the automatic placement algorithm will take care of that
+    // --> we only mind about the first two rows (sidebar/navbar and the header)
+    // --> the rest will be sized based on the content
+  }
 }

@@ -28,6 +28,17 @@
   // center grid track inside of grid container
   justify-content: center;
 
+  // below $bp-medium
+  @media only screen and (max-width: $bp-medium) {
+    // make the header span the entire viewport
+    grid-column: 1 / -1; // could have also written full-start / full-end
+  }
+
+  // below $bp-small
+  @media only screen and (max-width: $bp-small) {
+    padding: 5rem;
+  }
+
   &__logo {
     height: 3rem;
     justify-self: center;
