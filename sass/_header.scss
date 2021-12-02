@@ -1,4 +1,49 @@
 .header {
-    background-color: $color-grey-dark-1;
-    grid-column: full-start / col-end 6;
+  background-color: $color-grey-dark-1;
+  grid-column: full-start / col-end 6;
+  // put a background image with an overlay
+  background-image: linear-gradient(
+      rgba($color-secondary, 0.93),
+      rgba($color-secondary, 0.93)
+    ),
+    url("../img/hero.jpeg");
+
+  background-size: cover;
+  background-position: center;
+  padding: 8rem;
+  padding-top: 4rem;
+
+  display: grid;
+  // keep only the logo on top and push the other elements down
+  // that's because we set only the first row to be explicit (1fr)
+  // so the other rows are implicit and occupy only the space the need
+  // min-content: the second row occupies only the space needed
+  // 6rem: make the third row taller so the gap with the fourth row is bigger
+  grid-template-rows: 1fr min-content 6rem 1fr;
+  // only one colum that doesn't occupy the whole avaulable width but only the space needed by its wider child/content ("The ultimate personal freedom" text in this case)
+  grid-template-columns: max-content;
+  row-gap: 1.5rem;
+  // center grid track inside of grid container
+  justify-content: center;
+
+  &__logo {
+    height: 3rem;
+    justify-self: center;
+  }
+
+  // put the "view our properties" button on the top left of its grid cell
+  &__btn {
+    align-self: start;
+    justify-self: start;
+  }
+
+  &__seenon-text {
+  }
+
+  &__seenon-logos {
+    img {
+      // make images have the same height instead of same width otherwise it would be strange
+      height: 2.5rem;
+    }
+  }
 }
