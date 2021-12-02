@@ -1,11 +1,15 @@
 // Grid Item
 // Grid Container
 .features {
-    // background-color: $color-grey-light-2; // Testing porpouses
-    grid-column: center-start / center-end;
+  // background-color: $color-grey-light-2; // Testing porpouses
+  grid-column: center-start / center-end;
 
-    margin: 15rem 0;
+  margin: 15rem 0;
 
+  // Example of PROGRESSIVE ENHANCEMENT in case the browser didn't support CSS Grid
+  // from FLOAT LAYOUT to CSS GRID
+  // if the browser supports CSS Grid
+  @supports (display: grid) {
     display: grid;
     // grid-template-columns: repeat(3, 1fr);
     // to make columns responsive without writing Media Queries
@@ -16,31 +20,44 @@
     grid-gap: 6rem;
     // to override default "stretch" that create huge space if the bottom text is not a lot
     align-items: start;
+  }
 }
 
 // Grid Item
 // Grid Container
 .feature {
+  // if the browser didn't support CSS Grid we would use a FLOAT LAYOUT as fallback
+  float: left;
+  width: 33.3333%;
+  margin-bottom: 6rem;
 
-    display: grid;
-    // the icon col will be as large as the icon is and the text col will occupy the rest
-    grid-template-columns: min-content 1fr;
-    // we don't need to define rows, the content will define them
+  // if the browser supports CSS Grid
+  // reset the FLOAT LAYOUT's properties
+  @supports (display: grid) {
+    // no need to reset float because it's ignored by CSS Grid (and Flexbox)
+    width: auto;
+    margin-bottom: 0;
+  }
 
-    grid-row-gap: 1.5rem;
-    grid-column-gap: 2.5rem;
+  display: grid;
+  // the icon col will be as large as the icon is and the text col will occupy the rest
+  grid-template-columns: min-content 1fr;
+  // we don't need to define rows, the content will define them
 
-    &__icon {
-        fill: $color-primary;
-        width: 4.5rem;
-        height: 4.5rem;
-        // -1 is the last line of the EXPLICIT Grid so here it doesn't make sense because we didn't define rows
-        grid-row: 1 / span 2;
-        // to align it with the text on the right
-        transform: translateY(-1rem);
-    }
+  grid-row-gap: 1.5rem;
+  grid-column-gap: 2.5rem;
 
-    &__text {
-        font-size: 1.7rem;
-    }
+  &__icon {
+    fill: $color-primary;
+    width: 4.5rem;
+    height: 4.5rem;
+    // -1 is the last line of the EXPLICIT Grid so here it doesn't make sense because we didn't define rows
+    grid-row: 1 / span 2;
+    // to align it with the text on the right
+    transform: translateY(-1rem);
+  }
+
+  &__text {
+    font-size: 1.7rem;
+  }
 }
