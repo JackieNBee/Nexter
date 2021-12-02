@@ -1,43 +1,66 @@
 .sidebar {
-    background-color: $color-primary;
+  background-color: $color-primary;
 
-    grid-column: sidebar-start / sidebar-end;
-    // span across all rows
-    grid-row: 1 / -1;
+  grid-column: sidebar-start / sidebar-end;
+  // span across all rows
+  grid-row: 1 / -1;
 
-    // to horizontally center the button
-    display: flex;
-    justify-content: center;
+  // to horizontally center the button
+  display: flex;
+  justify-content: center;
+
+  // sidebar becomes a navbar
+  // it's now at the top
+  @media only screen and (max-width: $bp-large) {
+    grid-column: 1 / -1;
+    grid-row: 1 / 2;
+    justify-content: flex-end;
+    align-items: center;
+  }
 }
 
 .nav-btn {
-    border: 0;
-    border-radius: 0;
+  border: 0;
+  border-radius: 0;
 
+  background-color: #fff;
+  height: 2px;
+  width: 4.5rem;
+  // move all the button down otherwise the ::before is not visible
+  margin-top: 4rem;
+
+  // first and third lines of the button
+  &::before,
+  &::after {
     background-color: #fff;
     height: 2px;
     width: 4.5rem;
-    // move all the button down otherwise the ::before is not visible
-    margin-top: 4rem;
+    content: "";
+    display: block;
+  }
 
-    // first and third lines of the button
-    &::before,
-    &::after {
-        background-color: #fff;
-        height: 2px;
-        width: 4.5rem;
-        content: "";
-        display: block;
-    }
+  &::before {
+    transform: translateY(-1.5rem);
+  }
 
+  &::after {
+    // to make the third line have the same distance from the center as the first line we cannot put the same value
+    // because the translate property doesn't start counting the offset at the center
+    transform: translateY(1.3rem);
+  }
+
+  @media only screen and (max-width: $bp-large) {
+    // remove the top margin
+    margin-top: 0;
+    // add a right margin
+    margin-right: 3rem;
+
+    // reduce the gap betweel the lines
     &::before {
-        transform: translateY(-1.5rem);
+      transform: translateY(-1.2rem);
     }
-
     &::after {
-        // to make the third line have the same distance from the center as the first line we cannot put the same value
-        // because the translate property doesn't start counting the offset at the center
-        transform: translateY(1.3rem);
+      transform: translateY(1rem);
     }
-
+  }
 }

@@ -19,9 +19,11 @@
   // so the other rows are implicit and occupy only the space the need
   // min-content: the second row occupies only the space needed
   // 6rem: make the third row taller so the gap with the fourth row is bigger
-  grid-template-rows: 1fr min-content 6rem 1fr;
-  // only one colum that doesn't occupy the whole avaulable width but only the space needed by its wider child/content ("The ultimate personal freedom" text in this case)
-  grid-template-columns: max-content;
+  // minmax(6rem, min-content): the row should at least be 6rem tall but can also occupy the space needed to fit the content in the row
+  grid-template-rows: 1fr min-content minmax(6rem, min-content) 1fr;
+  // the maximun space the caplumn can occupy is the space needed by its wider child/content ("The ultimate personal freedom" text in this case)
+  // the minimun space cannot be narrower than the content
+  grid-template-columns: minmax(min-content, max-content);
   row-gap: 1.5rem;
   // center grid track inside of grid container
   justify-content: center;
@@ -62,10 +64,14 @@
     grid-template-columns: repeat(4, 1fr);
     column-gap: 3rem;
     justify-items: center;
+    align-items: center;
 
     img {
       // make images have the same height instead of same width otherwise it would be strange
-      height: 2.5rem;
+      // to make images responsive we use max-height: images can be max 2.5 rem tall but can even be less
+      max-height: 2.5rem;
+      // usally the width can be 100% but can also be less
+      max-width: 100%;
       // make the images darker (from white to grey)
       filter: brightness(70%);
     }

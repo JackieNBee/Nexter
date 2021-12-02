@@ -1,61 +1,91 @@
 // COLOR VARIABLES
 $color-primary: #c69963;
-$color-primary-dark: #B28451;
+$color-primary-dark: #b28451;
 
 $color-secondary: #101d2c;
 
 $color-grey-light-1: #f9f7f6;
 $color-grey-light-2: #aaa;
 
-$color-grey-dark-1: #54483A;
-$color-grey-dark-2: #6D5D4B;
+$color-grey-dark-1: #54483a;
+$color-grey-dark-2: #6d5d4b;
 
 // FONT VARIABLES
-$font-primary: 'Nunito',
-sans-serif;
-$font-display: 'Josefin Sans',
-sans-serif;
+$font-primary: "Nunito", sans-serif;
+$font-display: "Josefin Sans", sans-serif;
+
+// RESPONSIVE BREAKPOINTS
+$bp-largest: 75em; // 1200px (1200 / 16 = 75)
+$bp-large: 62.5em; // 1000px (1000 / 16 = 62.5)
 
 // CSS RESET
 *,
 *::before,
 *::after {
-    margin: 0;
-    padding: 0;
-    box-sizing: inherit;
+  margin: 0;
+  padding: 0;
+  box-sizing: inherit;
 }
 
 html {
-    box-sizing: border-box;
-    font-size: 62.5%; // 10px/16px = 62.5% -> 1rem = 10px
+  box-sizing: border-box;
+  font-size: 62.5%; // 10px/16px = 62.5% -> 1rem = 10px
+
+  // below $bp-largest
+  @media only screen and (max-width: $bp-largest) {
+    // reduce the font size
+    font-size: 50%;
+  }
 }
 
 body {
-    font-family: $font-primary;
-    color: $color-grey-dark-2;
-    font-weight: 300;
-    line-height: 1.6;
+  font-family: $font-primary;
+  color: $color-grey-dark-2;
+  font-weight: 300;
+  line-height: 1.6;
 }
 
 .container {
-    display: grid;
-    // It's far easier to think about responsiveness at beginning in CSS Grid than writing Media Queries
-    // min-content -> adapts to the content
-    // auto (default) -> adapts to the content
-    // vh = viewport height | vw = viewport width
-    // 40vh = HEIGHT of that particular row will ALWAYS be 40%(40vw) of the viewport width to keep kinda 16:9 screen ratio
-    grid-template-rows: 80vh min-content 40vw repeat(3, min-content);
-    // we want 8 columns, width of each one to be between their minumum content and 140px --> the columns start to adapt when we resize screen
-    // first column is the sidebar always 80px
-    // the 2 "1fr" cols are for centering the 8 cols on the center between sidebar and end of viewport -> those two will be the first to shrink until they are 60px because we want some margins anyway so the central cols start to shrink
-    // also with those two we can have "full bleed sections" 
-    // we're naming only the cols because we want to focus only on them
-    grid-template-columns: [sidebar-start] 8rem [sidebar-end full-start] minmax(60px, 1fr) [center-start] repeat(8, [col-start] minmax(min-content, 14rem) [col-end]) [center-end] minmax(60px, 1fr) [full-end];
+  display: grid;
+  // It's far easier to think about responsiveness at beginning in CSS Grid than writing Media Queries
+  // min-content -> adapts to the content
+  // auto (default) -> adapts to the content
+  // vh = viewport height | vw = viewport width
+  // 40vh = HEIGHT of that particular row will ALWAYS be 40%(40vw) of the viewport width to keep kinda 16:9 screen ratio
+  grid-template-rows: 80vh min-content 40vw repeat(3, min-content);
+  // we want 8 columns, width of each one to be between their minumum content and 140px --> the columns start to adapt when we resize screen
+  // first column is the sidebar always 80px
+  // the 2 "1fr" cols are for centering the 8 cols on the center between sidebar and end of viewport -> those two will be the first to shrink until they are 60px because we want some margins anyway so the central cols start to shrink
+  // also with those two we can have "full bleed sections"
+  // we're naming only the cols because we want to focus only on them
+  // NAMING THE COLUMNS/ROWS SAVES THE DAY when we want to change the grid structure later on in the media-queries, otherwise we would have to rewrite all code to replace the grid-items since the cols/rows numbers changed!
+  grid-template-columns:
+    [sidebar-start] 8rem [sidebar-end full-start] minmax(60px, 1fr)
+    [center-start] repeat(8, [col-start] minmax(min-content, 14rem) [col-end])
+    [center-end] minmax(60px, 1fr)
+    [full-end];
 
-    // Testing porpouses
-    // &>* {
-    //     padding: 40px;
-    //     font-size: 3rem;
-    // }
+  // below $bp-large
+  // THE POWER OF CSS GRID
+  // we can easily change the entire layour of the website modifing the grid definitions in the media-queries
+  @media only screen and (max-width: $bp-large) {
+    // add new a new row (sidebar becomes navbar)
+    grid-template-rows:
+      6rem // since we changed the font size is smaller now, 6rem = 6 * 8px = 48px
+      80vh min-content
+      40vw
+      repeat(3, min-content);
+    // remove a colomn (delete the sidebar)
+    grid-template-columns:
+      [full-start] minmax(60px, 1fr)
+      [center-start] repeat(8, [col-start] minmax(min-content, 14rem) [col-end])
+      [center-end] minmax(60px, 1fr)
+      [full-end];
+  }
 
+  // Testing porpouses
+  // &>* {
+  //     padding: 40px;
+  //     font-size: 3rem;
+  // }
 }
